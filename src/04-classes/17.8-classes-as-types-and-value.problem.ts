@@ -1,17 +1,17 @@
-import { Equal, Expect } from "../helpers/type-utils";
+import { Equal, Expect } from '../helpers/type-utils'
 
 class CustomError extends Error {
   constructor(message: string, public code: number) {
-    super(message);
-    this.name = "CustomError";
+    super(message)
+    this.name = 'CustomError'
   }
 }
 
 // How do we type the 'error' parameter?
-const handleCustomError = (error: unknown) => {
-  console.error(error.code);
+const handleCustomError = (error: CustomError) => {
+  console.error(error.code)
 
-  type test = Expect<Equal<typeof error.code, number>>;
-};
+  type test = Expect<Equal<typeof error.code, number>>
+}
 
-export {};
+export {}

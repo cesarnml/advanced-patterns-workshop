@@ -22,8 +22,8 @@ declare global {
   var myVar: number
 }
 
-globalThis.myFunc = () => true
-globalThis.myVar = 1
+global.myFunc = () => true
+global.myVar = 1
 
 it('Should let you call myFunc without it being imported', () => {
   expect(myFunc()).toBe(true)

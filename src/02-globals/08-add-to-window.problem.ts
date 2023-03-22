@@ -1,5 +1,5 @@
-import { expect, it } from "vitest";
-import { Equal, Expect } from "../helpers/type-utils";
+import { expect, it } from 'vitest'
+import { Equal, Expect } from '../helpers/type-utils'
 
 /**
  * Clues:
@@ -7,20 +7,26 @@ import { Equal, Expect } from "../helpers/type-utils";
  * 1. You'll need declare global again
  *
  * 2. Inside declare global, you'll need to modify the Window
- * interface to add a makeGreeting function
+ * interface to add a makeGreetingSolution function
  */
 
-window.makeGreeting = () => "Hello!";
+declare global {
+  interface Window {
+    makeGreetingSolution: () => string
+  }
+}
 
-it("Should let you call makeGreeting from the window object", () => {
-  expect(window.makeGreeting()).toBe("Hello, world!");
+window.makeGreetingSolution = () => 'Hello!'
 
-  type test1 = Expect<Equal<typeof window.makeGreeting, () => string>>;
-});
+it('Should let you call makeGreetingSolution from the window object', () => {
+  expect(window.makeGreetingSolution()).toBe('Hello, world!')
 
-it("Should not be available on globalThis", () => {
+  type test1 = Expect<Equal<typeof window.makeGreetingSolution, () => string>>
+})
+
+it('Should not be available on globalThis', () => {
   expect(
     // @ts-expect-error
-    globalThis.makeGreeting,
-  ).toBe(undefined);
-});
+    globalThis.makeGreetingSolution,
+  ).toBe(undefined)
+})
